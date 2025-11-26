@@ -30,12 +30,13 @@ Use your favorite plugin manager, e.g. with `lazy.nvim`:
 ## Usage
 
 - `:CCContext save <name>` — Save current context lines to `<name>.json`
-- `:CCContext load [name]` — Load context from `<name>.json` (`vim.ui.select` prompts if omitted)
-- `:CCContext delete [name]` — Delete `<name>.json` (`vim.ui.select` prompts if omitted)
+- `:CCContext load <name>` — Load context from `<name>.json` (`vim.ui.select` prompts if omitted)
+- `:CCContext delete <name>` — Delete `<name>.json` (`vim.ui.select` prompts if omitted)
 
 ## Future feature ideas
 
 project-level / global contexts
+
 auto saving/loading contexts in some manner
 
 ## License
