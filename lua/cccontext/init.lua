@@ -79,7 +79,6 @@ end
 
 function M.append_to_context()
 	local buf = vim.api.nvim_get_current_buf()
-	local cwd = vim.loop.cwd()
 	local abs_path = vim.api.nvim_buf_get_name(buf)
 	local path = vim.fn.fnamemodify(abs_path, ":.")
 	local stat = vim.loop.fs_stat(path)
