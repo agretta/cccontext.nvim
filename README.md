@@ -39,6 +39,8 @@ project-level / global contexts
 
 auto saving/loading contexts in some manner
 
+vimdocs
+
 ## License
 
 MIT

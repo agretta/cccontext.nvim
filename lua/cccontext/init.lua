@@ -77,6 +77,19 @@ function M.delete_context(name)
 	end
 end
 
+function M.append_to_context()
+	local buf = vim.api.nvim_get_current_buf()
+	local cwd = vim.loop.cwd()
+	local abs_path = vim.api.nvim_buf_get_name(buf)
+	local path = vim.fn.fnamemodify(abs_path, ":.")
+	local stat = vim.loop.fs_stat(path)
+	if not stat or stat.type ~= "file" then
+		return
+	end
+	local msg = string.format("\n>#file:%s", path)
+	require("CopilotChat").chat:append(msg)
+end
+
 --- setup function
 function M.setup()
 	local ok, _ = pcall(require, "CopilotChat")
@@ -95,8 +108,10 @@ vim.api.nvim_create_user_command("CCContext", function(opts)
 		M.load_context(args[2])
 	elseif cmd == "delete" then
 		M.delete_context(args[2])
+	elseif cmd == "append" then
+		M.append_to_context()
 	else
-		print("Usage: CCContext [save|load|delete] [name]")
+		print("Usage: CCContext [save|load|delete|append] [name]")
 	end
 end, { nargs = "*" })
 
