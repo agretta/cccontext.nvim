@@ -39,7 +39,7 @@ project-level / global contexts
 
 auto saving/loading contexts in some manner
 
-vimdocs
+vimdocs: <https://github.com/kdheepak/panvimdoc>
 
 ## License
 
