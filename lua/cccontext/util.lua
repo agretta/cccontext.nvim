@@ -1,8 +1,23 @@
 local M = {}
+
 --- Returns the directory path where CCContext stores its context files.
--- @return string: The absolute path to the CCContext context directory.
+-- @return string: The absolute path to the CCContext config directory with a project level dir.
 function M.get_context_dir()
-	return vim.fn.stdpath("config") .. "/ccccontext"
+	local config_base = vim.fn.stdpath("config") .. "/ccccontext"
+
+	local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+	local project_dir
+	if git_root and git_root ~= "" and vim.fn.isdirectory(git_root) == 1 then
+		project_dir = vim.fn.fnamemodify(git_root, ":t")
+	else
+		project_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+	end
+	local context_dir = config_base .. "/" .. project_dir
+	if vim.fn.isdirectory(context_dir) == 0 then
+		vim.fn.mkdir(context_dir, "p")
+	end
+	vim.notify("CCContext config directory: " .. context_dir, vim.log.levels.DEBUG)
+	return context_dir
 end
 
 --- Returns the absolute file path for a given context name.

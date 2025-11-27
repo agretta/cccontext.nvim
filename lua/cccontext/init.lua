@@ -85,7 +85,7 @@ function M.append_to_context()
 	if not stat or stat.type ~= "file" then
 		return
 	end
-	local msg = string.format("\n>#file:%s\n", path)
+	local msg = string.format(">#file:%s\n", path)
 	require("CopilotChat").chat:append(msg)
 end
 
